@@ -30,16 +30,16 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use((req, res, next) => {
-  if (req.body.role !== admin) {
-    return res.status(401).json({
-      message: "Kamu tidak boleh akses"
-    })
-  }
+// app.use((req, res, next) => {
+//   if (req.body.role !== admin) {
+//     return res.status(401).json({
+//       message: "Kamu tidak boleh akses"
+//     })
+//   }
 
-  next();
+//   next();
 
-})
+// })
 const port = process.env.port || 3000;
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
@@ -109,7 +109,7 @@ const removeTour = (req, res) => {
   const id = req.params.id * 1;
 
   // cari index dari data yang sesuai id di req.params
-  const tourIndex = tours.finsIndex(el => el.id === id);
+  const tourIndex = tours.findIndex(el => el.id === id);
 
   // validasi kalau data yang sesuai req.params.id nya gak ada
   if (tourIndex === -1) {
@@ -150,7 +150,6 @@ const createTour = (req, res) => {
       }
     })
   })
-  res.send('finish api');
 
 };
 
